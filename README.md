@@ -4,8 +4,8 @@
 
 > 我们建立了一个答疑微信群，希望各位能加入；
 >
-> 浙大短学期选课的同学进群备注：年级-专业-姓名（如：18-计科-张三）；其他同学请备注：未选课-姓名；课程课件下载：https://pan.zju.edu.cn/share/77a56e7176160243f9f5db37e1；
-课程作业要求：https://github.com/ZJUVAG/SummerCourse2019；选课的同学请在7月12号23:59:59之前跟我汇报组队（3人一组），组队登记：https://docs.qq.com/sheet/DWE1WRHhaQnp3TndR?preview_token=&coord=E6A0A0&tab=BB08J2
+> 浙大短学期选课的同学进群备注：年级-专业-姓名（如：18-计科-张三）；其他同学请备注：未选课-姓名；课程课件下载：<https://pan.zju.edu.cn/share/77a56e7176160243f9f5db37e1>；
+课程作业要求：<https://github.com/ZJUVAG/SummerCourse2019>；选课的同学请在7月12号23:59:59之前跟我汇报组队（3人一组），组队登记：<https://docs.qq.com/sheet/DWE1WRHhaQnp3TndR?preview_token=&coord=E6A0A0&tab=BB08J2>
 
 <img src="./assets/1562584621897.png" style="display: table; margin: 0 auto;"></img>
 
