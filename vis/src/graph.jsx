@@ -4,7 +4,10 @@ import * as d3 from "d3"
 class Graph extends Component {
     componentWillReceiveProps(props) {
         const graph = props.graph
+        // console.log(d3.select("#snapshot"))]
+        d3.selectAll("#graph > *").remove()
         const graphSVG = d3.select("#graph")
+        // console.log(graphSVG.node())
         const padding = 100
         const width = graphSVG.node().parentNode.clientWidth
         graphSVG.attr("width", width).attr("height", width)
@@ -38,6 +41,7 @@ class Graph extends Component {
             .enter()
             .append("circle")
             .attr("r", 5)
+        // console.log(node)
         function ticked() {
             let max = {}
             let min = {}

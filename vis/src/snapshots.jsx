@@ -8,6 +8,7 @@ class Snapshots extends Component {
 
     componentWillReceiveProps(props) {
         const snapshots = props.snapshots
+        // console.log(d3.select("#snapshot"))
         const snapshotSVG = d3.select("#snapshot")
         const padding = 100
         const width = snapshotSVG.node().parentNode.clientWidth
@@ -26,8 +27,8 @@ class Snapshots extends Component {
             .scaleLinear()
             .domain([min.y, max.y])
             .range([padding, width - padding])
-
         const snapshotLinkData = []
+        // console.log(snapshotLinkData)
         for (let i = 0; i < snapshots.length - 1; i++) {
             snapshotLinkData.push([
                 snapshots[i].vector,
@@ -47,7 +48,7 @@ class Snapshots extends Component {
             .attr("y2", d => yScale(d[1][1]))
             .attr("stroke", "#d9dde2")
             .attr("stroke-width", 3)
-
+        // console.log(snapshotLink)
         const pointsData = snapshots.map(snpst => snpst.vector)
         const points = snapshotSVG.selectAll("circle").data(pointsData)
         points.exit().remove()
@@ -60,8 +61,12 @@ class Snapshots extends Component {
             .attr("fill", "#a7cda9")
             .attr("stroke", "#d9dde2")
             .on("mouseover", (d, i) => {
-                console.log(d, i)
+                // console.log(d, i)
             })
+            .on("mousedown",(d, i) => {
+                this.props.setnum(i)
+            })
+        // console.log(pointsData)
     }
     render() {
         return <svg id="snapshot" />
