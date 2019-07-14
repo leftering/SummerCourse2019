@@ -5,6 +5,16 @@ class Graph extends Component {
     componentWillReceiveProps(props) {
         const graph = props.graph
         // console.log(d3.select("#snapshot"))]
+        // console.log(props)
+        graph.links = graph.links.map(link =>({
+            source: link.source.id ? link.source.id : link.source,
+            target: link.target.id ? link.target.id : link.target,
+            weight: link.weight
+        }))
+        graph.nodes = graph.nodes.map(node =>({
+            id: node.id
+        }))
+        // console.log(JSON.stringify(graph))
         d3.selectAll("#graph > *").remove()
         const graphSVG = d3.select("#graph")
         // console.log(graphSVG.node())
@@ -21,10 +31,10 @@ class Graph extends Component {
             )
             .force("charge", d3.forceManyBody())
             .force("center", d3.forceCenter(width / 2, width / 2))
-
         simulation.nodes(graph.nodes).on("tick", ticked)
-        console.log(graph)
         simulation.force("link").links(graph.links)
+        // console.log(JSON.stringify(graph.links))
+        // simulation.stop()
         const link = graphSVG
             .append("g")
             .attr("class", "links")
@@ -36,6 +46,7 @@ class Graph extends Component {
         const node = graphSVG
             .append("g")
             .attr("class", "nodes")
+            .attr("fill", "#A1A1A1")
             .selectAll("circle")
             .data(graph.nodes)
             .enter()
@@ -43,6 +54,7 @@ class Graph extends Component {
             .attr("r", 5)
         // console.log(node)
         function ticked() {
+            // console.log(graph.nodes)
             let max = {}
             let min = {}
             max.x = d3.max(graph.nodes, n => n.x)

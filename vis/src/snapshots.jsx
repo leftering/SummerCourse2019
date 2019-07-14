@@ -58,15 +58,33 @@ class Snapshots extends Component {
             .attr("cx", d => xScale(d[0]))
             .attr("cy", d => yScale(d[1]))
             .attr("r", 5)
-            .attr("fill", "#a7cda9")
-            .attr("stroke", "#d9dde2")
+            .attr("fill", (d, i) => {
+                // t = 255/2500
+                // r = (t * i).toString(16)
+                // console.log("#" + (Math.floor(255 / 2400 * (i+300))).toString(16) + "F0F0")
+                return "#" + "F0F0" + (Math.floor(255 / 2400 * (i+300))).toString(16)
+            })
+            .attr("stroke", "#A1A1A1")
+            .attr("id", (d, i) => {
+                return "s" + i
+            })
             .on("mouseover", (d, i) => {
-                // console.log(d, i)
+                // console.log(d3.select("#s"+i))
+                d3.select("#s" + i)
+                    .attr("r", 15)
+                    // .attr("fill", "#9B30FF")
+                // console.log(i)
+            })
+            .on("mouseout", (d, i) => {
+                d3.select("#s" + i)
+                    .attr("r", 5)
+                    // .attr("fill", "#98F5FF")
             })
             .on("mousedown",(d, i) => {
                 this.props.setnum(i)
             })
-        // console.log(pointsData)
+        // console.log(points.data)
+        // console.log(snapshotSVG.selectAll("circle"))
     }
     render() {
         return <svg id="snapshot" />

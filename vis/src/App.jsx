@@ -18,7 +18,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        d3.json("./test_data.json").then(snapshots => {
+        d3.json("./t-SNE_data.json").then(snapshots => {
+            // console.log(snapshots[0].graph);
             this.setState({
                 snapshots: snapshots,
                 graph: snapshots[this.state.snapnum].graph
@@ -27,8 +28,11 @@ class App extends React.Component {
     }
 
     setGraph(num) {
-        if(num !== this.state.snapnum)
-            this.setState({snapnum: num, graph: this.state.snapshots[num].graph})
+        // if(num !== this.state.snapnum)
+        this.setState({
+            snapnum: num,
+            graph: this.state.snapshots[num].graph
+        })
             // d3.select("#graph").remove()
             // this.render()
         // this.render()
