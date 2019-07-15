@@ -2,6 +2,34 @@
 
 .App {
   text-align: center;
+  background:#202020  ;
+}
+
+.BDColor {
+  text-align: center;
+  background:black;
+}
+
+.BGraph {
+  border-style:solid;
+	border-width:1px;
+  border-color:#FF6600;
+}
+
+#viewspoint {
+  color: "white";
+}
+
+/* .btn1 { */
+  /* background-color: "black" */
+/* } */
+
+.AColor {
+  text-align: center;
+  background:black;
+  border-style:solid;
+	border-width:1px;
+  border-color:#FF6600;
 }
 
 .App-logo {
@@ -23,6 +51,10 @@
 
 .App-link {
   color: #61dafb;
+}
+
+body{
+  background-color: #202020
 }
 
 @keyframes App-logo-spin {

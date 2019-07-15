@@ -12,7 +12,9 @@ class Graph extends Component {
             weight: link.weight
         }))
         graph.nodes = graph.nodes.map(node =>({
-            id: node.id
+            id: node.id,
+            cls: node.cls,
+            degree: node.degree
         }))
         // console.log(JSON.stringify(graph))
         d3.selectAll("#graph > *").remove()
@@ -46,12 +48,91 @@ class Graph extends Component {
         const node = graphSVG
             .append("g")
             .attr("class", "nodes")
-            .attr("fill", "#A1A1A1")
             .selectAll("circle")
             .data(graph.nodes)
             .enter()
             .append("circle")
-            .attr("r", 5)
+            .attr("r", (d) => {
+                return 3 + d.degree/2 > 7 ? 7 : 4 + d.degree/2
+            })
+            .attr("id", (d,i) => {
+                return "gp" + i
+            })
+            .attr("stroke", "#d9dde2")
+            .attr("fill", (d,i)=>{
+                if(d.cls==="PC")
+                    return "#D9043D"
+                else if(d.cls==="PC*")
+                    return "#7BB255"
+                else if(d.cls==="MP*1")
+                    return "#5EBBE7"
+                else if(d.cls==="PSI*")
+                    return "#F2B705"
+                else if(d.cls==="MP*2")
+                    return "#F25C05"
+                else
+                    return "white"
+            })
+            .on("mouseover", (d, i) => {
+                d3.select("#gp" + i)
+                    .attr("stroke-width", 4)
+                    .attr("stroke", "white")
+            })
+            .on("mouseout", (d, i) => {
+                d3.select("#gp" + i)
+                    .attr("stroke-width", 1)
+                    .attr("stroke", "#d9dde2")                
+            })
+            .on("mousedown", (d, i) => {
+                this.props.selectpoint(d)
+            })
+
+        var dataset = [
+            "MP*1","MP*2","PSI*","PC*","PC"
+        ];
+        var rectHeight = 13;
+        const blocks = graphSVG
+            .append("g")
+            .selectAll("rect")
+            .data(dataset)
+                .enter()
+            .append("rect")
+            .attr("x",function(d,i){
+                return width-padding*0.8 - i * rectHeight*2.5
+            })
+            .attr("y",0)
+            .attr("width", rectHeight) 
+            .attr("height", rectHeight)
+            .attr("fill", (d,i)=>{
+                if(d==="MP*1")
+                    return "#F25C05"
+                else if(d==="MP*2")
+                return "#F2B705"
+                else if(d==="PSI*")
+                    return "#5EBBE7"
+                else if(d==="PC*")
+                    return "#7BB255"
+                else if(d==="PC")
+                    return "#D9043D"
+            })
+            
+        const text = graphSVG
+            .append("g")
+            .selectAll("text")
+            .data(dataset)
+            .enter()
+            .append("text")
+            .attr("x",function(d,i){
+                return width-padding*0.8 - i * rectHeight*2.5
+            })
+            .attr("y",25)
+            .attr("fill","white")
+            .attr("font-size",10)
+            .attr("font-family","Arial")
+            .attr("stroke","white")
+            .attr("stroke-width",".5")
+            .text((d,i)=>d)
+            
         // console.log(node)
         function ticked() {
             // console.log(graph.nodes)
@@ -80,6 +161,10 @@ class Graph extends Component {
                 })
                 .attr("y2", function(d) {
                     return yScale(d.target.y)
+                })
+                .attr("stroke-width", (d) => {
+                    // return 7
+                    return 1+ d.weight/15 > 7 ? 7 : 1+ d.weight/15
                 })
             node.attr("cx", function(d) {
                 return xScale(d.x)
