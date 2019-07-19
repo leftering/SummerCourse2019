@@ -2,9 +2,9 @@ import React, { Component } from "react"
 import * as d3 from "d3"
 
 class Snapshots extends Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+        // super(props)
+    // }
 
     componentWillReceiveProps(props) {
         const snapshots = props.snapshots
@@ -75,43 +75,39 @@ class Snapshots extends Component {
                             .attr("x2","100%")
                             .attr("y2","0%");
                            
-        var stop1 = linearGradient.append("stop")
+        linearGradient.append("stop")
                     .attr("offset","0%")
                     .style("stop-color",a.toString());
 
-        var stop2 = linearGradient.append("stop")
+        linearGradient.append("stop")
                     .attr("offset","100%")
                     .style("stop-color",b.toString());
         
-        var colorRect = snapshotSVG.append("rect")
-                    .attr("x", snapshotSVG.node().parentNode.clientWidth-120)
+        snapshotSVG.append("rect")
+                    .attr("x", width-150)
                     .attr("y", 0)
-                    .attr("width", 100)
+                    .attr("width", 120)
                     .attr("height", 10)
                     .attr("stroke","grey")
                     .attr("stroke-width",2)
                     .style("fill","url(#" + linearGradient.attr("id") + ")");
 
-        var minValueText = snapshotSVG.append("text")
+        snapshotSVG.append("text")
                     .attr("class","valueText")
-                    .attr("x", snapshotSVG.node().parentNode.clientWidth-120)
+                    .attr("x", width-180)
                     .attr("y", 28)
                     .attr("fill","white")
                     .attr("font-size",10)
-                    .text(function(){
-                        return minvalue+1;
-                    });
+                    .text("2012-11-19 06:30");
 
-        var maxValueText = snapshotSVG.append("text")
+        snapshotSVG.append("text")
                     .attr("class","valueText")
-                    .attr("x", snapshotSVG.node().parentNode.clientWidth-30)
+                    .attr("x", width-80)
                     .attr("y", 28)
                    // .attr("dy", "-0.3em")
                     .attr("fill","white")
                     .attr("font-size",10)
-                    .text(function(){
-                        return maxvalue+1;
-                    });
+                    .text("2012-11-27 16:14");
 
         //画点
         points
@@ -119,7 +115,7 @@ class Snapshots extends Component {
             .append("circle")
             .attr("cx", d => xScale(d[0]))
             .attr("cy", d => yScale(d[1]))
-            .attr("r", 5)
+            .attr("r", 4)
             .attr("fill", (d, i) => {
                 var t = linear(i);
                 var color = computeColor(t);
@@ -140,7 +136,7 @@ class Snapshots extends Component {
                 d3.select("#s" + i)
                    .attr("r", 6)
                    .attr("stroke","white")
-                   .attr("stroke-width",3)
+                   .attr("stroke-width",5)
                     //this.props.setnum(i)
                     // .attr("fill", "#9B30FF")
                 // console.log(i)

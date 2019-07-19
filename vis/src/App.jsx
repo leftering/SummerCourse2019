@@ -1,7 +1,7 @@
 import React from "react"
 import * as d3 from "d3"
 import "./App.css"
-import { Col, Row, Button } from "antd"
+import { Col, Row } from "antd"
 import Snapshots from "./snapshots"
 import Graph from "./graph"
 import Degree from "./degree"
@@ -12,10 +12,10 @@ class App extends React.Component {
         this.state = {
             snapshots: [],
             graph: {},
-            degree: {},
+            node: {},
             snapnum: 0,
-            spoint: {},
-            datasetpath: 0
+            spoint:{},
+            datasetpath:0
         }
     Object.assign(this.state,this.props)
     this.setGraph = this.setGraph.bind(this)
@@ -24,20 +24,19 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        d3.json("./t-SNE_data2.json").then(snapshots => {
-            // console.log(snapshots)
+        d3.json("./t-SNE_data.json").then(snapshots => {
+            // console.log(snapshots[0].graph);
             this.setState({
                 snapshots: snapshots,
                 graph: snapshots[this.state.snapnum].graph,
-                degree: snapshots[this.state.snapnum].degree
+                //node: snapshots[this.state.snapnum].graph.nodes
             })
         })
     }
 
-    selectpoint(d) {
-        // console.log(d)
+    selectpoint(d){
         this.setState({
-            spoint: d
+            spoint:d
         })
     }
 
@@ -56,30 +55,19 @@ class App extends React.Component {
         // if(num !== this.state.snapnum)
         this.setState({
             snapnum: num,
-            degree: this.state.snapshots[num].degree
+           // node: this.state.snapshots[num].graph.nodes
+            graph: this.state.snapshots[num].graph
         })
+
             // d3.select("#graph").remove()
             // this.render()
         // this.render()
     }
 
-    // sdataset = () => {
-    //     if(this.state.datasetpath === 1) {
-    //         this.setState({
-    //             datasetpath: 0
-    //         })
-    //     }
-    //     else {
-    //         this.setState({
-    //             datasetpath: 1
-    //         })
-    //     }
-    // }
-
     render() {
         const snapshots = this.state.snapshots
         const graph = this.state.graph
-        const degree = this.state.degree
+        // const degree = this.state.degree
         return (
             <div className="App">
                 <Row span={1}>
@@ -93,7 +81,7 @@ class App extends React.Component {
                             <h3><font color="grey">Degree Distribution</font></h3>
                         </Row>
                         <div className="BDColor">
-                        <Degree degree={degree}/>
+                        <Degree graph={graph} />
                         <Row span={1}>
                             <div>
                                 <font color="white">Name: {this.state.spoint.id + this.state.spoint.cls ? this.state.spoint.id + this.state.spoint.cls : ""}</font>
@@ -124,5 +112,4 @@ class App extends React.Component {
         )
     }
 }
-
 export default App
