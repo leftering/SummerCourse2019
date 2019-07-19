@@ -1,7 +1,7 @@
 import React from "react"
 import * as d3 from "d3"
 import "./App.css"
-import { Col, Row } from "antd"
+import { Col, Row, Button } from "antd"
 import Snapshots from "./snapshots"
 import Graph from "./graph"
 import Degree from "./degree"
@@ -67,23 +67,19 @@ class App extends React.Component {
     render() {
         const snapshots = this.state.snapshots
         const graph = this.state.graph
-        // const degree = this.state.degree
+        const degree = this.state.degree
         return (
             <div className="App">
-                <Row span={1}>
-                <div>
-                    <h1> </h1>
-                </div>
-                </Row>
+                <Row span={1}> <div><h1/></div></Row>
                 <Row>
                     <Col span={4} >
                         <Row span={1}>
-                            <h3><font color="grey">Degree Distribution</font></h3>
+                            <h3 className="TextColor">><font color="white">Degree Distribution</font></h3>
                         </Row>
-                        <div className="BDColor">
+                        <div className="DColor">
                         <Degree graph={graph} />
                         <Row span={1}>
-                            <div>
+                            <div className="textColor">
                                 <font color="white">Name: {this.state.spoint.id + this.state.spoint.cls ? this.state.spoint.id + this.state.spoint.cls : ""}</font>
                                 <br/>
                                 <font color="white">Degree: {this.state.spoint.degree}</font>
@@ -102,12 +98,13 @@ class App extends React.Component {
                         </div>
                     </Col>
                     <Col span={10}>
-                        <div className="BDColor BGraph">
+                        <div className="BColor BGraph">
                             <h1><big><font color="grey">&ensp;&ensp;NETWORK</font></big></h1>
                             <Graph graph={graph} selectpoint={this.selectpoint} />
                         </div>
                     </Col>
                 </Row>
+                <Row span={1}> <div><h1/></div></Row>
             </div>
         )
     }
