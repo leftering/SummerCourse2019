@@ -67,47 +67,47 @@ class Snapshots extends Component {
         var computeColor = d3.interpolate(a,b);
         
         //加入颜色标志
-        // var defs = snapshotSVG.append("defs")
-        // var linearGradient = defs.append("linearGradient")
-        //                     .attr("id","linearGradient")
-        //                     .attr("x1","0%")
-        //                     .attr("y1","0%")
-        //                     .attr("x2","100%")
-        //                     .attr("y2","0%");
+        var defs = snapshotSVG.append("defs")
+        var linearGradient = defs.append("linearGradient")
+                            .attr("id","linearGradient")
+                            .attr("x1","0%")
+                            .attr("y1","0%")
+                            .attr("x2","100%")
+                            .attr("y2","0%");
                            
-        // linearGradient.append("stop")
-        //             .attr("offset","0%")
-        //             .style("stop-color",a.toString());
+        linearGradient.append("stop")
+                    .attr("offset","0%")
+                    .style("stop-color",a.toString());
 
-        // linearGradient.append("stop")
-        //             .attr("offset","100%")
-        //             .style("stop-color",b.toString());
+        linearGradient.append("stop")
+                    .attr("offset","100%")
+                    .style("stop-color",b.toString());
         
-        // snapshotSVG.append("rect")
-        //             .attr("x", width-150)
-        //             .attr("y", 0)
-        //             .attr("width", 120)
-        //             .attr("height", 10)
-        //             .attr("stroke","grey")
-        //             .attr("stroke-width",2)
-        //             .style("fill","url(#" + linearGradient.attr("id") + ")");
+        snapshotSVG.append("rect")
+                    .attr("x", width-180)
+                    .attr("y", 0)
+                    .attr("width", 120)
+                    .attr("height", 10)
+                    .attr("stroke","grey")
+                    .attr("stroke-width",2)
+                    .style("fill","url(#" + linearGradient.attr("id") + ")");
 
-        // snapshotSVG.append("text")
-        //             .attr("class","valueText")
-        //             .attr("x", width-180)
-        //             .attr("y", 28)
-        //             .attr("fill","white")
-        //             .attr("font-size",10)
-        //             .text("2012-11-19 06:30");
+        snapshotSVG.append("text")
+                    .attr("class","valueText")
+                    .attr("x", width-180)
+                    .attr("y", 28)
+                    .attr("fill","white")
+                    .attr("font-size",10)
+                    .text("1");
 
-        // snapshotSVG.append("text")
-        //             .attr("class","valueText")
-        //             .attr("x", width-80)
-        //             .attr("y", 28)
-        //            // .attr("dy", "-0.3em")
-        //             .attr("fill","white")
-        //             .attr("font-size",10)
-        //             .text("2012-11-27 16:14");
+        snapshotSVG.append("text")
+                    .attr("class","valueText")
+                    .attr("x", width-80)
+                    .attr("y", 28)
+                   // .attr("dy", "-0.3em")
+                    .attr("fill","white")
+                    .attr("font-size",10)
+                    .text("167");
 
         //画点
         points
